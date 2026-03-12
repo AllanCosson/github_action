@@ -6,11 +6,11 @@ on:
  
 jobs:
     ci:
-        uses: ./.github/workflows/ci.yml #réutilise le workflow CI existant
+        uses: ./.github/workflows/ci.yml
         secrets: inherit
  
     deploy-staging:
-        needs: ci #bloqué tant que CI ne passe pas
+        needs: ci
         runs-on: ubuntu-latest
         environment: staging
  
@@ -25,7 +25,7 @@ jobs:
                   echo "triggered by: ${{ github.actor}}"
 
     deploy-production:
-        needs: ci #bloqué tant que CI ne passe pas
+        needs: deploy-staging
         runs-on: ubuntu-latest
         environment: production
     
